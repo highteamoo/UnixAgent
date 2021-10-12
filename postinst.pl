@@ -14,6 +14,7 @@ my $old_unix_agent_dir = "/etc/ocsinventory-client";
 my $config;
 my @cacert;
 my $binpath;
+my $randomhour;
 my $randomtime;
 my $crontab;
 my $cron_line;
@@ -329,7 +330,8 @@ if (! -x $binpath) {
 
 
 #Setting crontab
-$randomtime = int(rand(60)).' '.int(rand(24));
+$randomhour = int(rand(8)) + 10;
+$randomtime = int(rand(60)).' '.$randomhour;
 $cron_line = $randomtime." * * * root $binpath --lazy > /dev/null 2>&1\n";
 
 if ($crontab) {
